@@ -1,7 +1,7 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-document.addEventListener('DOMContentLoaded', function () {
+
   const galleryContainer = document.querySelector('.gallery');
 
   function createGallery() {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
       lightbox.show();
     }
   });
-});
+
     
 
 
