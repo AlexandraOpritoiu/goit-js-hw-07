@@ -1,5 +1,4 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
 
 const galleryContainer = document.querySelector('.gallery');
 
@@ -24,58 +23,28 @@ const galleryContainer = document.querySelector('.gallery');
     });
   }
 
- galleryContainer.addEventListener('click', function (event) {
-  event.preventDefault();
+  createGallery();
 
-  if (event.target.nodeName === 'IMG') {
-    const originalImageUrl = event.target.getAttribute('data-source');
-
-    event.target.closest('.gallery__link').addEventListener('click', function (e) {
-      e.preventDefault();
-    });
-
- 
-    const lightbox = new SimpleLightbox('.gallery__item img', {
-  captionsData: 'alt',
-  captionsPosition: 'bottom',
-  captionDelay: 250,
- });
-      
-    lightbox.open({
-      items: [
-        {
-          src: originalImageUrl,
-          alt: event.target.alt,
-        },
-      ],
-    });
-  }
+ const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
 });
 
+galleryContainer.addEventListener('click', function (event) {
+    event.preventDefault();
 
-
-function destroyGallery() {
-    if (lightbox) {
-       lightbox.close();
-    };
-};
-
-document.addEventListener('keydown', function (event) {
-    if (lightbox && lightbox.visible()) {
-    if (event.key === 'ArrowLeft') {
-        lightbox.prev();
-    } else if (event.key === 'ArrowRight') {
-        lightbox.next();
-    } else if (event.key === 'Escape') {
-         lightbox.close();
-    }
+    if (event.target.nodeName === 'IMG') {
+        lightbox.open({
+            items: galleryItems.map((item) => ({
+                src: item.original,
+                alt: item.description,
+            })),   
+        });
     }
 });
-         
-createGallery();
 
 console.log(galleryItems);
-
 
 
 
